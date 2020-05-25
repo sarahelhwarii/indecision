@@ -9,7 +9,7 @@
   "scripts": {
     "serve": "live-server public/",
     "build-babel": "babel src/new.js --out-file=scripts/app.js --presets=env,react",
-    "build": "webpack"
+    "build": "webpack -w"
   },
   "dependencies": {
     "babel-cli": "^7.0.0-beta.3",
