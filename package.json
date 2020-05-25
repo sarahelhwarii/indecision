@@ -1,0 +1,25 @@
+{
+  "name": "indecisionApp",
+  "version": "1.0.0",
+  "description": " ",
+  "main": "index.js",
+  "repository": " ",
+  "author": "SarahElhwarii",
+  "license": "MIT",
+  "scripts": {
+    "serve": "live-server public/",
+    "build-babel": "babel src/new.js --out-file=scripts/app.js --presets=env,react",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "babel-cli": "^7.0.0-beta.3",
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1",
+    "live-server": "^1.2.1",
+    "webpack": "^4.43.0",
+    "yarn": "^1.22.4"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.11"
+  }
+}
