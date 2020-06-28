@@ -1,0 +1,161 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+
+  var _react = _interopRequireDefault(require("react"));
+
+  var _reactDom = require("react-dom");
+
+  var _Header = _interopRequireDefault(require("./Header"));
+
+  var _AddOption = _interopRequireDefault(require("./AddOption"));
+
+  var _Options = _interopRequireDefault(require("./Options"));
+
+  var _Action = _interopRequireDefault(require("./Action"));
+
+  var _jsxFileName = "C:\\Users\\Sarah\\Desktop\\reactCourseProjects\\indecisionApp\\src\\components\\IndecisionApp.js";
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  class IndecisionApp extends _react.default.Component {
+    constructor(props) {
+      super(props);
+      this.removeAll = this.removeAll.bind(this);
+      this.handlePick = this.handlePick.bind(this);
+      this.handleAddOption = this.handleAddOption.bind(this);
+      this.handleDeleteOption = this.handleDeleteOption.bind(this);
+      this.state = {
+        options: []
+      };
+    }
+
+    componentDidMount() {
+      try {
+        const json = localStorage.getItem("options");
+        const options = JSON.parse(json);
+
+        if (options) {
+          this.setState(() => ({
+            options
+          }));
+        }
+      } catch (e) {}
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+      if (prevState.options.length !== this.state.options.length) {
+        const json = JSON.stringify(this.state.options);
+        localStorage.setItem("options", json);
+      }
+    }
+
+    handlePick() {
+      const length = this.state.options.length;
+      const rand = Math.floor(Math.random() * length);
+      const randOption = this.state.options[rand];
+      alert(randOption);
+    }
+
+    handleDeleteOption(optionToBeRemoved) {
+      this.setState(prevState => ({
+        options: prevState.options.filter(option => {
+          return optionToBeRemoved !== option;
+        })
+      }));
+    }
+
+    removeAll() {
+      this.setState(() => {
+        return {
+          options: []
+        };
+      });
+    }
+
+    handleAddOption(option) {
+      if (!option) {
+        return "Please enter a valid option";
+      } else if (this.state.options.indexOf(option) > -1) {
+        return "This option already exists";
+      }
+
+      this.setState(prevState => ({
+        options: prevState.options.concat(option)
+      }));
+    }
+
+    render() {
+      const subtitle = "put your life in a computer's hands";
+      return /*#__PURE__*/_react.default.createElement("div", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 67,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_react.default.createElement(_Header.default, {
+        subtitle: subtitle,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 68,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_react.default.createElement(_Action.default, {
+        handlePick: this.handlePick,
+        hasOptions: this.state.options.length > 0,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 69,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_react.default.createElement(_Options.default, {
+        removeAll: this.removeAll,
+        options: this.state.options,
+        handleDeleteOption: this.handleDeleteOption,
+        hasOptions: this.state.options.length > 0,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 73,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_react.default.createElement(_AddOption.default, {
+        handleAddOption: this.handleAddOption,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 79,
+          columnNumber: 9
+        }
+      }));
+    }
+
+  }
+
+  exports.default = IndecisionApp;
+  (0, _reactDom.render)( /*#__PURE__*/_react.default.createElement(IndecisionApp, {
+    __self: void 0,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 85,
+      columnNumber: 8
+    }
+  }), document.getElementById("app"));
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

@@ -1,0 +1,103 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+
+  var _react = _interopRequireDefault(require("react"));
+
+  var _jsxFileName = "C:\\Users\\Sarah\\Desktop\\reactCourseProjects\\indecisionApp\\src\\components\\AddOption.js";
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  class AddOption extends _react.default.Component {
+    constructor(props) {
+      super(props);
+      this.AddOptionHandler = this.AddOptionHandler.bind(this);
+      this.state = {
+        error: undefined
+      };
+    }
+
+    AddOptionHandler(e) {
+      const newOption = e.target.elements.option.value.trim();
+      const error = this.props.handleAddOption(newOption);
+      this.setState(() => {
+        return {
+          error
+        };
+      });
+
+      if (!error) {
+        e.target.elements.option.value = "";
+      }
+
+      setTimeout(() => {
+        this.setState(() => {
+          return {
+            error: undefined
+          };
+        });
+      }, 1500);
+      e.preventDefault();
+    }
+
+    render() {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 30,
+          columnNumber: 7
+        }
+      }, this.state.error && /*#__PURE__*/_react.default.createElement("p", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 31,
+          columnNumber: 30
+        }
+      }, this.state.error), /*#__PURE__*/_react.default.createElement("form", {
+        onSubmit: this.AddOptionHandler,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 32,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_react.default.createElement("input", {
+        type: "text",
+        name: "option",
+        placeholder: "add your option here",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 33,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_react.default.createElement("button", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 38,
+          columnNumber: 11
+        }
+      }, "Add Option")));
+    }
+
+  }
+
+  exports.default = AddOption;
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

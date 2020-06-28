@@ -1,0 +1,71 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+
+  var _react = _interopRequireDefault(require("react"));
+
+  var _Option = _interopRequireDefault(require("./components/Option"));
+
+  var _jsxFileName = "C:\\Users\\Sarah\\Desktop\\reactCourseProjects\\indecisionApp\\src\\components\\Options.js";
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  const Options = props => {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6,
+        columnNumber: 5
+      }
+    }, props.options.length == 0 && /*#__PURE__*/_react.default.createElement("p", {
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 7,
+        columnNumber: 37
+      }
+    }, "Please Add an option to get started"), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: props.removeAll,
+      disabled: !props.hasOptions,
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 8,
+        columnNumber: 7
+      }
+    }, "Remove All"), props.options.map(option => /*#__PURE__*/_react.default.createElement(_Option.default, {
+      key: option,
+      optionText: option,
+      handleDeleteOption: props.handleDeleteOption,
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 13,
+        columnNumber: 9
+      }
+    })));
+  };
+
+  _c = Options;
+  var _default = Options;
+  exports.default = _default;
+
+  var _c;
+
+  $RefreshReg$(_c, "Options");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

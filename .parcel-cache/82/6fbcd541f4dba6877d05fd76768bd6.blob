@@ -1,0 +1,52 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+
+  var _react = _interopRequireDefault(require("react"));
+
+  var _jsxFileName = "C:\\Users\\Sarah\\Desktop\\reactCourseProjects\\indecisionApp\\src\\components\\Action.js";
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  const Action = props => {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 5,
+        columnNumber: 5
+      }
+    }, /*#__PURE__*/_react.default.createElement("button", {
+      onClick: props.handlePick,
+      disabled: !props.hasOptions,
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 6,
+        columnNumber: 7
+      }
+    }, "What shall I do?!!!"));
+  };
+
+  _c = Action;
+  var _default = Action;
+  exports.default = _default;
+
+  var _c;
+
+  $RefreshReg$(_c, "Action");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

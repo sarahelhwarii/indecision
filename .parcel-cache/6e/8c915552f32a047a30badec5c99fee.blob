@@ -1,0 +1,145 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Header = _interopRequireDefault(require("./components/Header"));
+
+var _AddOption = _interopRequireDefault(require("./components/AddOption"));
+
+var _Options = _interopRequireDefault(require("./components/Options"));
+
+var _Action = _interopRequireDefault(require("./components/Action"));
+
+var _jsxFileName = "C:\\Users\\Sarah\\Desktop\\reactCourseProjects\\indecisionApp\\src\\components\\IndecisionApp.js";
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class IndecisionApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.removeAll = this.removeAll.bind(this);
+    this.handlePick = this.handlePick.bind(this);
+    this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
+    this.state = {
+      options: []
+    };
+  }
+
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem("options");
+      const options = JSON.parse(json);
+
+      if (options) {
+        this.setState(() => ({
+          options
+        }));
+      }
+    } catch (e) {}
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options);
+      localStorage.setItem("options", json);
+    }
+  }
+
+  handlePick() {
+    const length = this.state.options.length;
+    const rand = Math.floor(Math.random() * length);
+    const randOption = this.state.options[rand];
+    alert(randOption);
+  }
+
+  handleDeleteOption(optionToBeRemoved) {
+    this.setState(prevState => ({
+      options: prevState.options.filter(option => {
+        return optionToBeRemoved !== option;
+      })
+    }));
+  }
+
+  removeAll() {
+    this.setState(() => {
+      return {
+        options: []
+      };
+    });
+  }
+
+  handleAddOption(option) {
+    if (!option) {
+      return "Please enter a valid option";
+    } else if (this.state.options.indexOf(option) > -1) {
+      return "This option already exists";
+    }
+
+    this.setState(prevState => ({
+      options: prevState.options.concat(option)
+    }));
+  }
+
+  render() {
+    const subtitle = "put your life in a computer's hands";
+    return /*#__PURE__*/React.createElement("div", {
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 65,
+        columnNumber: 7
+      }
+    }, /*#__PURE__*/React.createElement(_Header.default, {
+      subtitle: subtitle,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 66,
+        columnNumber: 9
+      }
+    }), /*#__PURE__*/React.createElement(_Action.default, {
+      handlePick: this.handlePick,
+      hasOptions: this.state.options.length > 0,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 67,
+        columnNumber: 9
+      }
+    }), /*#__PURE__*/React.createElement(_Options.default, {
+      removeAll: this.removeAll,
+      options: this.state.options,
+      handleDeleteOption: this.handleDeleteOption,
+      hasOptions: this.state.options.length > 0,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 71,
+        columnNumber: 9
+      }
+    }), /*#__PURE__*/React.createElement(_AddOption.default, {
+      handleAddOption: this.handleAddOption,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 77,
+        columnNumber: 9
+      }
+    }));
+  }
+
+}
+
+exports.default = IndecisionApp;
+render( /*#__PURE__*/React.createElement(IndecisionApp, {
+  __self: void 0,
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 83,
+    columnNumber: 8
+  }
+}), document.getElementById("app"));

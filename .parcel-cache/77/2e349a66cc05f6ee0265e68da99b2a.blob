@@ -1,0 +1,345 @@
+"use strict";
+
+var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  var _react = _interopRequireDefault(require("react"));
+
+  var _reactDom = require("react-dom");
+
+  var _jsxFileName = "C:\\Users\\Sarah\\Desktop\\reactCourseProjects\\indecisionApp\\src\\app.js";
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  class IndecisionApp extends _react.default.Component {
+    constructor(props) {
+      super(props);
+      this.removeAll = this.removeAll.bind(this);
+      this.handlePick = this.handlePick.bind(this);
+      this.handleAddOption = this.handleAddOption.bind(this);
+      this.handleDeleteOption = this.handleDeleteOption.bind(this);
+      this.state = {
+        options: []
+      };
+    }
+
+    componentDidMount() {
+      try {
+        const json = localStorage.getItem("options");
+        const options = JSON.parse(json);
+
+        if (options) {
+          this.setState(() => ({
+            options
+          }));
+        }
+      } catch (e) {}
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+      if (prevState.options.length !== this.state.options.length) {
+        const json = JSON.stringify(this.state.options);
+        localStorage.setItem("options", json);
+      }
+    }
+
+    handlePick() {
+      const length = this.state.options.length;
+      const rand = Math.floor(Math.random() * length);
+      const randOption = this.state.options[rand];
+      alert(randOption);
+    }
+
+    handleDeleteOption(optionToBeRemoved) {
+      this.setState(prevState => ({
+        options: prevState.options.filter(option => {
+          return optionToBeRemoved !== option;
+        })
+      }));
+    }
+
+    removeAll() {
+      this.setState(() => {
+        return {
+          options: []
+        };
+      });
+    }
+
+    handleAddOption(option) {
+      if (!option) {
+        return "Please enter a valid option";
+      } else if (this.state.options.indexOf(option) > -1) {
+        return "This option already exists";
+      }
+
+      this.setState(prevState => ({
+        options: prevState.options.concat(option)
+      }));
+    }
+
+    render() {
+      const subtitle = "put your life in a computer's hands";
+      return /*#__PURE__*/_react.default.createElement("div", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 63,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_react.default.createElement(Header, {
+        subtitle: subtitle,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 64,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_react.default.createElement(Action, {
+        handlePick: this.handlePick,
+        hasOptions: this.state.options.length > 0,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 65,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_react.default.createElement(Options, {
+        removeAll: this.removeAll,
+        options: this.state.options,
+        handleDeleteOption: this.handleDeleteOption,
+        hasOptions: this.state.options.length > 0,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 69,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_react.default.createElement(AddOption, {
+        handleAddOption: this.handleAddOption,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 75,
+          columnNumber: 9
+        }
+      }));
+    }
+
+  }
+
+  const Header = props => {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 82,
+        columnNumber: 5
+      }
+    }, /*#__PURE__*/_react.default.createElement("h1", {
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 83,
+        columnNumber: 7
+      }
+    }, props.title), props.subtitle && /*#__PURE__*/_react.default.createElement("h2", {
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 84,
+        columnNumber: 26
+      }
+    }, props.subtitle));
+  };
+
+  _c = Header;
+  Header.defaultProps = {
+    title: "Indecision App version 2.0.0"
+  };
+
+  const Action = props => {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 94,
+        columnNumber: 5
+      }
+    }, /*#__PURE__*/_react.default.createElement("button", {
+      onClick: props.handlePick,
+      disabled: !props.hasOptions,
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 95,
+        columnNumber: 7
+      }
+    }, "What shall I do?!!!"));
+  };
+
+  _c2 = Action;
+
+  const Options = props => {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 104,
+        columnNumber: 5
+      }
+    }, props.options.length == 0 && /*#__PURE__*/_react.default.createElement("p", {
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 105,
+        columnNumber: 37
+      }
+    }, "Please Add an option to get started"), /*#__PURE__*/_react.default.createElement("button", {
+      onClick: props.removeAll,
+      disabled: !props.hasOptions,
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 106,
+        columnNumber: 7
+      }
+    }, "Remove All"), props.options.map(option => /*#__PURE__*/_react.default.createElement(Option, {
+      key: option,
+      optionText: option,
+      handleDeleteOption: props.handleDeleteOption,
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 111,
+        columnNumber: 9
+      }
+    })));
+  };
+
+  _c3 = Options;
+
+  const Option = props => {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 122,
+        columnNumber: 5
+      }
+    }, props.optionText, /*#__PURE__*/_react.default.createElement("button", {
+      onClick: e => {
+        props.handleDeleteOption(props.optionText);
+      },
+      __self: void 0,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 124,
+        columnNumber: 7
+      }
+    }, "remove"));
+  };
+
+  _c4 = Option;
+
+  class AddOption extends _react.default.Component {
+    constructor(props) {
+      super(props);
+      this.AddOptionHandler = this.AddOptionHandler.bind(this);
+      this.state = {
+        error: undefined
+      };
+    }
+
+    AddOptionHandler(e) {
+      const newOption = e.target.elements.option.value.trim();
+      const error = this.props.handleAddOption(newOption);
+      this.setState(() => {
+        return {
+          error
+        };
+      });
+
+      if (!error) {
+        e.target.elements.option.value = "";
+      }
+
+      setTimeout(() => {
+        this.setState(() => {
+          return {
+            error: undefined
+          };
+        });
+      }, 1500);
+      e.preventDefault();
+    }
+
+    render() {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 162,
+          columnNumber: 7
+        }
+      }, this.state.error && /*#__PURE__*/_react.default.createElement("p", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 163,
+          columnNumber: 30
+        }
+      }, this.state.error), /*#__PURE__*/_react.default.createElement("form", {
+        onSubmit: this.AddOptionHandler,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 164,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_react.default.createElement("input", {
+        type: "text",
+        name: "option",
+        placeholder: "add your option here",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 165,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_react.default.createElement("button", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 170,
+          columnNumber: 11
+        }
+      }, "Add Option")));
+    }
+
+  }
+
+  (0, _reactDom.render)( /*#__PURE__*/_react.default.createElement(IndecisionApp, {
+    __self: void 0,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 177,
+      columnNumber: 8
+    }
+  }), document.getElementById("app"));
+
+  var _c, _c2, _c3, _c4;
+
+  $RefreshReg$(_c, "Header");
+  $RefreshReg$(_c2, "Action");
+  $RefreshReg$(_c3, "Options");
+  $RefreshReg$(_c4, "Option");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
